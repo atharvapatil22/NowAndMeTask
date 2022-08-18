@@ -11,6 +11,36 @@ import { AntDesign } from "@expo/vector-icons";
 import { normalize, colors } from "../theme";
 
 const AuthForm = ({ onClose }) => {
+  const [formType, setFormType] = useState("sign-up");
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const changeFormType = () => {
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setFormType(formType === "login" ? "sign-up" : "login");
+  };
+
+  const handleSumbit = () => {
+    let payload = {};
+
+    if (formType === "login") {
+      payload["email/username"] = email;
+    }
+    if (formType === "sign-up") {
+      payload.email = email;
+      payload.username = username;
+    }
+    payload.password = password;
+
+    // Payload can be sent to POST API when required
+
+    console.log("payload", payload);
+  };
+
   return (
     <View style={{ marginBottom: heightSc * 30, paddingHorizontal: "2%" }}>
       <View
@@ -33,7 +63,7 @@ const AuthForm = ({ onClose }) => {
       <Text
         style={{ color: "grey", fontSize: normalize(16), textAlign: "center" }}
       >
-        WELCOME BACK
+        {formType === "login" ? "WELCOME BACK" : "SIGN UP"}
       </Text>
       <Text
         style={{
@@ -44,15 +74,35 @@ const AuthForm = ({ onClose }) => {
           fontWeight: "bold",
         }}
       >
-        Log into your account
+        {formType === "login"
+          ? "Log into your account"
+          : "Create an account to continue"}
       </Text>
 
-      <Text style={styles.label}>Email or Username</Text>
+      <Text style={styles.label}>
+        {formType === "login" ? "Email or Username" : "Email"}
+      </Text>
       <TextInput
+        value={email}
+        onChangeText={(txt) => setEmail(txt)}
         style={styles.textInput}
         placeholder={"Enter your Email"}
         placeholderTextColor={colors.blueAsh}
+        keyboardType="email-address"
       />
+
+      {formType === "sign-up" && (
+        <>
+          <Text style={styles.label}>Username</Text>
+          <TextInput
+            value={username}
+            onChangeText={(txt) => setUsername(txt)}
+            style={styles.textInput}
+            placeholder={"Choose a prefered username"}
+            placeholderTextColor={colors.blueAsh}
+          />
+        </>
+      )}
 
       <View
         style={{
@@ -63,20 +113,28 @@ const AuthForm = ({ onClose }) => {
         }}
       >
         <Text style={{ ...styles.label, marginTop: 0 }}>Password</Text>
-        <TouchableOpacity>
-          <Text style={{ fontSize: normalize(14), color: "grey" }}>
-            Forgot password?
-          </Text>
-        </TouchableOpacity>
+        {formType === "login" && (
+          <TouchableOpacity>
+            <Text style={{ fontSize: normalize(14), color: "grey" }}>
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <TextInput
+        value={password}
+        onChangeText={(txt) => setPassword(txt)}
         secureTextEntry
         style={styles.textInput}
-        placeholder={"Enter your Password"}
+        placeholder={
+          formType === "login"
+            ? "Enter your Password"
+            : "Choose a prefered password"
+        }
         placeholderTextColor={colors.blueAsh}
       />
 
-      <TouchableOpacity style={styles.actionBtn}>
+      <TouchableOpacity style={styles.actionBtn} onPress={handleSumbit}>
         <Text
           style={{
             color: "white",
@@ -84,18 +142,21 @@ const AuthForm = ({ onClose }) => {
             textAlign: "center",
           }}
         >
-          Login now
+          {formType === "login" ? "Login now" : "Continue"}
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
+        onPress={changeFormType}
         style={{
           flexDirection: "row",
           marginTop: heightSc * 20,
         }}
       >
         <Text style={{ fontSize: normalize(14), color: colors.blueAsh }}>
-          Not registered yet?
+          {formType === "login"
+            ? "Not registered yet?"
+            : "Already have an account?"}
         </Text>
         <Text
           style={{
@@ -104,7 +165,8 @@ const AuthForm = ({ onClose }) => {
             color: "grey",
           }}
         >
-          Register <AntDesign name="arrowright" size={normalize(16)} />
+          {formType === "login" ? "Register" : "Login"}
+          <AntDesign name="arrowright" size={normalize(16)} />
         </Text>
       </TouchableOpacity>
     </View>
