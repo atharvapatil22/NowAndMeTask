@@ -11,14 +11,27 @@ import React, { useState } from "react";
 import Post from "../Components/Post";
 import { normalize, colors } from "../theme";
 import EmoticonBubble from "../Components/EmoticonBubble";
+import BottomModal from "../Components/BottomModal";
 
 const Home = () => {
   const [user, setUser] = useState("Jane");
   const [postContent, setPostContent] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <View>
       <ScrollView contentContainerStyle={styles.wrapper}>
+        {!!showModal && (
+          <BottomModal
+            children={
+              <View>
+                <Text>test</Text>
+              </View>
+            }
+            onRequestClose={() => setShowModal(false)}
+          />
+        )}
+
         {/* Heading */}
         <View>
           <Text style={{ color: "white", fontSize: normalize(32) }}>
@@ -51,7 +64,10 @@ const Home = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.postBtn}>
+          <TouchableOpacity
+            style={styles.postBtn}
+            onPress={() => setShowModal(true)}
+          >
             <Text
               style={{
                 color: "white",
@@ -94,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black_2,
     marginTop: heightSc * 30,
     borderColor: colors.blueAsh,
-    borderWidth: 1.2,
+    borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: "4%",
     paddingVertical: heightSc * 45,

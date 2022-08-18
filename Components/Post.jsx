@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black_2,
     marginTop: heightSc * 30,
     borderColor: colors.blueAsh,
-    borderWidth: 1.2,
+    borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: "4%",
     paddingVertical: heightSc * 36,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   authorImage: {
     width: normalize(40),
     height: normalize(40),
-    borderRadius: "100%",
+    borderRadius: 150,
   },
   postContent: {
     flexDirection: "row",
