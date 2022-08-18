@@ -17,12 +17,8 @@ const Home = () => {
   const [postContent, setPostContent] = useState("");
 
   return (
-    <View style={styles.screenWrapper}>
-      <ScrollView
-        contentContainerStyle={{
-          paddingTop: heightSc * 80,
-        }}
-      >
+    <View>
+      <ScrollView contentContainerStyle={styles.wrapper}>
         {/* Heading */}
         <View>
           <Text style={{ color: "white", fontSize: normalize(32) }}>
@@ -47,7 +43,7 @@ const Home = () => {
               placeholder="How are you feeling today?"
               placeholderTextColor={colors.blueAsh}
               style={{
-                color: "white",
+                color: "grey",
                 fontSize: normalize(17),
                 paddingLeft: "3%",
                 width: "93%",
@@ -69,8 +65,9 @@ const Home = () => {
         </View>
 
         {/* List Of User Posts */}
-        <Post />
-        <Post />
+        {Posts.map((post, index) => (
+          <Post key={index} data={post} />
+        ))}
       </ScrollView>
     </View>
   );
@@ -83,9 +80,9 @@ const heightSc = height / 1000;
 const widthSc = width / 1000;
 
 const styles = StyleSheet.create({
-  screenWrapper: {
-    flex: 1,
-    width: "100%",
+  wrapper: {
+    paddingTop: heightSc * 80,
+    paddingBottom: heightSc * 120,
     paddingHorizontal: "4%",
   },
   message: {
@@ -103,7 +100,7 @@ const styles = StyleSheet.create({
     paddingVertical: heightSc * 45,
   },
   textInput: {
-    backgroundColor: colors.black_1,
+    backgroundColor: colors.black_3,
     fontSize: normalize(20),
     flexDirection: "row",
     paddingVertical: heightSc * 12,
@@ -113,10 +110,35 @@ const styles = StyleSheet.create({
   },
   postBtn: {
     backgroundColor: colors.blue_1,
-    paddingVertical: heightSc * 10,
+    paddingVertical: heightSc * 13,
     width: "30%",
     marginLeft: "70%",
     borderRadius: 6,
     marginTop: heightSc * 20,
   },
 });
+
+const Posts = [
+  {
+    authorImage:
+      "https://media.istockphoto.com/photos/pleasant-young-indian-woman-freelancer-consult-client-via-video-call-picture-id1300972573?k=20&m=1300972573&s=612x612&w=0&h=Tiwi8Y0q8FBg8nL0i5GL_GslELTVLKkEB2e6m63Jlcg=",
+    authorName: "Theresa Webb",
+    postedAt: "5 mins ago",
+    edited: false,
+    emoji: "👋",
+    content:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi aperiam deserunt voluptas, ipsa minus labore ipsam porro pariatur quidem, dicta impedit quaerat cumque, corporis fuga!",
+    commentsCount: 24,
+  },
+  {
+    authorImage:
+      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFsZSUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80",
+    authorName: "Marvin McKinney",
+    postedAt: "8 mins ago",
+    edited: true,
+    emoji: "😔",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum repudiandae distinctio blanditiis saepe error, aperiam ullam, quas consequatur quaerat similique delectus fuga autem, placeat unde?",
+    commentsCount: 24,
+  },
+];

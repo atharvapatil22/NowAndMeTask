@@ -16,6 +16,7 @@ const normalize = (size) => {
 const colors = {
   black_1: "#131319",
   black_2: "#27292d",
+  black_3: "#191920",
   blue_1: "#4a96ff",
   blueAsh: "#414654",
 };
