@@ -12,6 +12,7 @@ import Post from "../Components/Post";
 import { normalize, colors } from "../theme";
 import EmoticonBubble from "../Components/EmoticonBubble";
 import BottomModal from "../Components/BottomModal";
+import AuthForm from "../Components/AuthForm";
 
 const Home = () => {
   const [user, setUser] = useState("Jane");
@@ -23,11 +24,7 @@ const Home = () => {
       <ScrollView contentContainerStyle={styles.wrapper}>
         {!!showModal && (
           <BottomModal
-            children={
-              <View>
-                <Text>test</Text>
-              </View>
-            }
+            children={<AuthForm onClose={() => setShowModal(false)} />}
             onRequestClose={() => setShowModal(false)}
           />
         )}
