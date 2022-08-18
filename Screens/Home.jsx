@@ -6,6 +6,7 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import Post from "../Components/Post";
@@ -17,7 +18,7 @@ import AuthForm from "../Components/AuthForm";
 const Home = () => {
   const [user, setUser] = useState("Jane");
   const [postContent, setPostContent] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   return (
     <View>
@@ -41,7 +42,7 @@ const Home = () => {
         </View>
 
         {/* New Post */}
-        <View style={styles.newPost}>
+        <Pressable style={styles.newPost} onPress={() => setShowModal(true)}>
           <Text style={{ color: "white", fontSize: normalize(26) }}>
             Create Post
           </Text>
@@ -75,11 +76,13 @@ const Home = () => {
               Post
             </Text>
           </TouchableOpacity>
-        </View>
+        </Pressable>
 
         {/* List Of User Posts */}
         {Posts.map((post, index) => (
-          <Post key={index} data={post} />
+          <Pressable onPress={() => setShowModal(true)} key={index}>
+            <Post data={post} />
+          </Pressable>
         ))}
       </ScrollView>
     </View>
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// Simulatiing API response
 const Posts = [
   {
     authorImage:

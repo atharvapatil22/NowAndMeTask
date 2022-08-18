@@ -95,9 +95,10 @@ export default BottomModal;
 
 const styles = StyleSheet.create({
   overlay: {
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: "rgba(0,0,0,0.6)",
     flex: 1,
     justifyContent: "flex-end",
+    blurRadius: 90,
   },
   container: {
     backgroundColor: colors.black_2,
@@ -115,8 +116,8 @@ const styles = StyleSheet.create({
   },
   sliderIndicator: {
     backgroundColor: "#CECECE",
-    height: 4,
-    width: 45,
-    borderRadius: 6,
+    height: 2,
+    width: "12%",
+    borderRadius: 8,
   },
 });

@@ -11,7 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { normalize, colors } from "../theme";
 
 const AuthForm = ({ onClose }) => {
-  const [formType, setFormType] = useState("sign-up");
+  const [formType, setFormType] = useState("login");
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
